@@ -29,4 +29,4 @@ js/app.js          validación de datos, motores de cálculo, dibujo de la líne
 
 ## Integrantes
 
-Se pueden escribir los nombres de la pareja directamente al pie de la página (campo editable) antes de entregar el código fuente.
+--------
