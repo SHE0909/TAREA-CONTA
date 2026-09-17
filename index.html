@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Línea de Tiempo Financiera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <p class="eyebrow">Ingeniería económica · trabajo en parejas</p>
+      <h1>Simulador de línea de tiempo financiera</h1>
+    </div>
+    <p class="topbar__subtitle">Elige un modelo, ingresa los datos de la operación y obtén el cálculo junto con su diagrama de flujo.</p>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Selección de actividad">
+    <button class="tab" data-activity="simple" type="button">
+      <span class="tab__index">01</span>
+      <span class="tab__label">Interés simple</span>
+    </button>
+    <button class="tab" data-activity="compuesto" type="button">
+      <span class="tab__index">02</span>
+      <span class="tab__label">Interés compuesto</span>
+    </button>
+    <button class="tab" data-activity="aritmetico" type="button">
+      <span class="tab__index">03</span>
+      <span class="tab__label">Gradiente aritmético</span>
+    </button>
+    <button class="tab" data-activity="geometrico" type="button">
+      <span class="tab__index">04</span>
+      <span class="tab__label">Gradiente geométrico</span>
+    </button>
+  </nav>
+
+  <main class="content">
+
+    <section id="intro" class="view">
+      <div class="frame intro-lead">
+        <p class="eyebrow">Cómo usar el simulador</p>
+        <h2>Selecciona un modelo en el menú superior para empezar</h2>
+        <p class="lead">Cada modelo pide los datos de una operación financiera, calcula el resultado con la fórmula correspondiente y traza su línea de tiempo: periodos en el eje horizontal, una flecha por cada entrada o salida de efectivo, y el valor asociado a cada una.</p>
+      </div>
+
+      <div class="model-grid">
+        <article class="frame model-card">
+          <span class="model-card__index">01</span>
+          <h3>Interés simple</h3>
+          <p>El interés se calcula siempre sobre el capital inicial. El crecimiento del valor futuro es lineal.</p>
+        </article>
+        <article class="frame model-card">
+          <span class="model-card__index">02</span>
+          <h3>Interés compuesto</h3>
+          <p>El interés se calcula sobre el saldo acumulado de cada periodo. El crecimiento es exponencial.</p>
+        </article>
+        <article class="frame model-card">
+          <span class="model-card__index">03</span>
+          <h3>Gradiente aritmético</h3>
+          <p>Serie de pagos que aumenta o disminuye una cantidad fija <em>G</em> en cada periodo.</p>
+        </article>
+        <article class="frame model-card">
+          <span class="model-card__index">04</span>
+          <h3>Gradiente geométrico</h3>
+          <p>Serie de pagos que crece o decrece a una tasa porcentual constante <em>g</em> por periodo.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workspace" class="view is-hidden">
+
+      <div class="workspace-grid">
+        <div class="frame panel-form">
+          <p class="eyebrow" id="activity-kicker">Actividad</p>
+          <h2 id="activity-title">&nbsp;</h2>
+
+          <form id="calc-form" class="fields-form" novalidate>
+            <div class="fields" id="calc-fields"></div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--solid">Calcular</button>
+              <button type="reset" class="btn btn--outline" id="btn-reset">Limpiar</button>
+            </div>
+            <p class="error-box is-hidden" id="error-box" role="alert"></p>
+          </form>
+        </div>
+
+        <aside class="frame panel-formula">
+          <p class="eyebrow">Fórmula</p>
+          <p class="formula" id="activity-formula"></p>
+          <p class="eyebrow">Convención de signos</p>
+          <p class="hint" id="activity-hint"></p>
+        </aside>
+      </div>
+
+      <div id="results-wrap" class="is-hidden">
+        <p class="section-label">Resultados</p>
+        <div class="results" id="results"></div>
+        <p class="warning-note is-hidden" id="warning-note"></p>
+
+        <p class="section-label">Línea de tiempo</p>
+        <div class="frame timeline-frame">
+          <div class="timeline-scroll">
+            <svg id="timeline" xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+        </div>
+        <p class="legend" id="timeline-legend"></p>
+
+        <div class="table-head">
+          <p class="section-label">Tabla de flujos</p>
+          <button type="button" class="btn btn--ghost btn--small" id="btn-csv">Descargar CSV</button>
+        </div>
+        <div class="frame table-frame">
+          <div class="table-scroll">
+            <table id="flow-table"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Integrantes: <span class="footer__names" contenteditable="true" data-placeholder="JEFERSON CONSTANZA · ---" id="team-names"></span></p>
+    <p class="footer__note">Simulador de línea de tiempo financiera — Ingeniería económica</p>
+  </footer>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
